@@ -1,4 +1,15 @@
 <p>notes works!</p>
 
 
-<button class="btn-primary add-note"> Add Note </button>
+<button class="btn-primary add-note" (click)="addNote()"> Add Note </button>
+
+
+@for (note of notesData(); track note.id){
+    <div>
+        <h3>{{note.title}}</h3>
+        <h4>{{note.content}}</h4>
+
+        <button class="btn-secondary" (click)="updateNote(note)">Edit</button>
+        <button class="btn-secondary" (click)="deleteNote(note.id)">Delete</button>
+    </div>
+}
