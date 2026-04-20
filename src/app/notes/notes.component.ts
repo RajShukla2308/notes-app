@@ -1,27 +1,28 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NoteServiceService } from '../note-service.service';
 import { Note } from '../notes.model';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-notes',
-  imports: [],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css',
 })
 export class NotesComponent implements OnInit{
 
   private notesService = inject(NoteServiceService);
+  private router = inject(Router)
 
   notesData = this.notesService.notes$;
 
   constructor(){
-    const note:Note = {
-      title: 'First note',
-      content: 'this is content of first note',
-      isPinned: false,
-      id: crypto.randomUUID(),
-    }
-    this.notesService.addNote(note)
+    // const note:Note = {
+    //   title: 'First note',
+    //   content: 'this is content of first note',
+    //   isPinned: false,
+    //   id: crypto.randomUUID(),
+    // }
+    // this.notesService.addNote(note)
   }
 
   ngOnInit(): void {
@@ -29,20 +30,19 @@ export class NotesComponent implements OnInit{
   }
 
   addNote(){
-    const note:Note = {
-      id: crypto.randomUUID(),
-      title: 'First note',
-      content: 'this is content of first note',
-      isPinned: false,
-    }
-    this.notesService.addNote(note);
+    this.router.navigate(['add-note'])
+    // const note:Note = {
+    //   id: crypto.randomUUID(),
+    //   title: 'First note',
+    //   content: 'this is content of first note',
+    //   isPinned: false,
+    // }
+    // this.notesService.addNote(note);
   }
 
 
   updateNote(note:Note){
-    note.content = 'content of second note';
-    note.title = 'second note'
-    this.notesService.updateNote(note);
+    this.router.navigate(['update-note/',note.id])
   }
 
   deleteNote(id:string){

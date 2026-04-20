@@ -1,1 +1,20 @@
-<p>add-note works!</p>
+<p>{{this.currentNoteId() ? 'Edit note' : 'Add note'}} works!</p>
+
+
+<form [formGroup]="notesForm" (ngSubmit)="onAddNote()">
+
+    <div class="form-field">
+        <label name="title"> Title </label>
+        <input for="title" formControlName="title" />
+    </div>
+
+
+    <div class="form-field">
+        <label name="title"> Content </label>
+        <textarea for="title" formControlName="content"></textarea>
+    </div>
+
+    <button type="submit">{{this.currentNoteId() ? 'Update note' : 'Add note'}}</button>
+
+
+</form>

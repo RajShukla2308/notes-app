@@ -17,8 +17,9 @@ export class NoteServiceService {
   notes$ = this.notes.asReadonly();
 
 
-  addNote(note: Note){
+  addNote(note: any){
     const newNote: Note = {
+      id: crypto.randomUUID(),
       ...note
     }
     this.notes.update(previousNotes=>[...previousNotes,newNote]);
@@ -43,7 +44,9 @@ export class NoteServiceService {
 
 
 
-
+  getNote(id:string){
+    return this.notes().find(note=> note.id== id)
+  }
 
 
 
