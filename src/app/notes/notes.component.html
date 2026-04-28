@@ -5,11 +5,12 @@
 
 
 @for (note of notesData(); track note.id){
-    <div>
+    <div class="note">
         <h3>{{note.title}}</h3>
         <h4>{{note.content}}</h4>
 
         <button class="btn-secondary" (click)="updateNote(note)">Edit</button>
         <button class="btn-secondary" (click)="deleteNote(note.id)">Delete</button>
+        <button class="btn-secondary" (click)="pinNote(note.id)">{{!note.isPinned ? 'Pin' : 'Unpin'}}</button>
     </div>
 }

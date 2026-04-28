@@ -63,6 +63,18 @@ export class NoteServiceService {
     this.searchTerm.set(term);
   }
 
-
+  pinNote(id: string){
+    this.notes.update(previousNotes=>
+      previousNotes.map(note=>{
+        if(note.id === id){
+          return {
+            ...note, 
+            isPinned: !note.isPinned
+          }
+        }
+        return note;
+      })
+    )
+  }
 
 }

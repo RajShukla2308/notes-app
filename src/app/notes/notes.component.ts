@@ -59,4 +59,8 @@ export class NotesComponent implements OnInit{
     this.notesService.setSearchTerm(this.searchTerm)
   }
 
+  pinNote(id: string){
+    this.notesService.pinNote(id);
+  }
+
 }
