@@ -5,6 +5,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CustomDirective } from '../custom.directive';
 import { IfDirective } from "../if.directive";
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -18,9 +19,13 @@ export class NotesComponent implements OnInit{
   private notesService = inject(NoteServiceService);
   private router = inject(Router)
 
-  notesData = this.notesService.filteredList;
+  notesData = this.notesService.filteredNotes;
 
   searchTerm = '';
+
+
+  // adding sbuject for debouncing - 
+  private searchSubject = new Subject<string>();
 
 
 
@@ -35,6 +40,10 @@ export class NotesComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.searchSubject.pipe(debounceTime(300)).subscribe(data=>{
+      this.notesService.setSearchTerm(data);
+    })
    
   }
 
@@ -59,15 +68,18 @@ export class NotesComponent implements OnInit{
   }
 
   searchNotes(){
-    this.notesService.setSearchTerm(this.searchTerm)
+   // this.notesService.setSearchTerm(this.searchTerm)
+
+   // debouncing with subject
+   this.searchSubject.next(this.searchTerm);
   }
 
   pinNote(id: string){
     this.notesService.pinNote(id);
   }
 
-  filterList(type: string){
-    this.notesService.filterList(type);
+  filterList(type: 'all' | 'pinned'){
+    this.notesService.setFilterTerm(type)
   }
 
 }
