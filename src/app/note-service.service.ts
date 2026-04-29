@@ -77,4 +77,11 @@ export class NoteServiceService {
     )
   }
 
+  filterList(type:string){
+
+    // this.filteredList = computed(()=>{
+
+    // })
+  }
+
 }

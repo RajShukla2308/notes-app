@@ -1,7 +1,12 @@
 <p>notes works!</p>
 
 <input type="text" [(ngModel)]="searchTerm" (input)="searchNotes()"/>
-<button class="btn-primary add-note" (click)="addNote()"> Add Note </button>
+<button class="btn-primary add-note" *appIf="true" (click)="addNote()"> Add Note </button>
+
+<div class="filters">
+    <button class="filter-btn" appCustom (click)="filterList('all')">All</button>
+    <button class="filter-btn" appCustom (click)="filterList('pinned')">Pinned</button>
+</div>
 
 
 @for (note of notesData(); track note.id){

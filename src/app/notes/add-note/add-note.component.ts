@@ -60,7 +60,7 @@ export class AddNoteComponent implements OnInit{
         content: this.notesForm?.value?.content,
         isPinned: false
       }
-      this. notesService.addNote(note);
+      this.notesService.addNote(note);
     }
     
     this.router.navigate([''])

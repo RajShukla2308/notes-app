@@ -3,12 +3,15 @@ import { NoteServiceService } from '../note-service.service';
 import { Note } from '../notes.model';
 import { Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CustomDirective } from '../custom.directive';
+import { IfDirective } from "../if.directive";
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css',
-  imports: [FormsModule]
+  imports: [FormsModule, CustomDirective, IfDirective],
+  
 })
 export class NotesComponent implements OnInit{
 
@@ -61,6 +64,10 @@ export class NotesComponent implements OnInit{
 
   pinNote(id: string){
     this.notesService.pinNote(id);
+  }
+
+  filterList(type: string){
+    this.notesService.filterList(type);
   }
 
 }
