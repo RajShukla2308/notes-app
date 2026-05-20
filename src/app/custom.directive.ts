@@ -11,18 +11,29 @@ export class CustomDirective {
   elementRef = inject(ElementRef);
   renderer2 = inject(Renderer2)
 
-  @HostListener('mouseenter')
-  onHover(){
-   // this.elementRef.nativeElement.style.backgroundColor = 'blue'
-   this.renderer2.setStyle(this.elementRef.nativeElement,'background-color','blue')
-  }
+  // @HostListener('mouseenter')
+  // onHover(){
+  //  // this.elementRef.nativeElement.style.backgroundColor = 'blue'
+  //  this.renderer2.setStyle(this.elementRef.nativeElement,'background-color','blue')
+  // }
 
-  @HostListener('mouseleave')
-  onMouseLeave(){
-   // this.elementRef.nativeElement.style.backgroundColor = null;
-   this.renderer2.setStyle(this.elementRef.nativeElement,'background-color',null)
-  }
+  // @HostListener('mouseleave')
+  // onMouseLeave(){
+  //  // this.elementRef.nativeElement.style.backgroundColor = null;
+  //  this.renderer2.setStyle(this.elementRef.nativeElement,'background-color',null)
+  // }
 
+ 
+
+  @HostListener('input',['$event']) sanitizeInput(event:Event){
+
+    let input = this.elementRef.nativeElement as HTMLInputElement;
+   
+
+    input.value = input.value.replace(/[^0-9]/g,'')
+    
+
+  }
 
 
 }

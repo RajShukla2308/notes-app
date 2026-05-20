@@ -1,0 +1,18 @@
+
+Search Here <input type="text" [formControl]="searchText" (input)="searchMovies()"/>
+
+{{searchText.value}}
+
+
+
+@for(movie of moviesData();track movie.id){
+    <div style="border:1px solid black; margin-top: 10px; padding: 5px;">
+
+    <div>Title - {{movie.title}}</div>
+    <div>About - {{movie.description}}</div>
+    </div>
+}
+
+<input #inputToFocus appCustom type="text" />
+
+<button (click)="focusInput()" >Focus</button>
