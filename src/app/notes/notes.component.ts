@@ -2,16 +2,17 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NoteServiceService } from '../note-service.service';
 import { Note } from '../notes.model';
 import { Router, RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomDirective } from '../custom.directive';
 import { IfDirective } from "../if.directive";
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, Subject, throttleTime } from 'rxjs';
+// import { NgStyle } from "../../../node_modules/@angular/common/common_module.d-NEF7UaHr";
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css',
-  imports: [FormsModule, CustomDirective, IfDirective],
+  imports: [FormsModule, CustomDirective, IfDirective,ReactiveFormsModule],
   
 })
 export class NotesComponent implements OnInit{
@@ -26,6 +27,9 @@ export class NotesComponent implements OnInit{
 
   // adding sbuject for debouncing - 
   private searchSubject = new Subject<string>();
+
+
+  textColor = 'blue'
 
 
 

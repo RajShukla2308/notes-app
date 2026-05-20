@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit, Signal } from '@angular/core';
+import { Component, computed, effect, inject, input, NgZone, OnInit, Signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Note } from '../../notes.model';
 import { NoteServiceService } from '../../note-service.service';
@@ -17,6 +17,12 @@ export class AddNoteComponent implements OnInit{
   notesService = inject(NoteServiceService)
   notesForm!: FormGroup;
   router = inject(Router);
+
+  // name = input.required<string>();
+
+  showIfDirective = false;
+
+  private zone = inject(NgZone);
 
 
   // inject the activated route
@@ -42,6 +48,10 @@ export class AddNoteComponent implements OnInit{
         content: currentNote?.content
       })
     }
+
+    this.zone.runOutsideAngular(()=>{
+      // these changes wont get detected.
+    })
   }
 
   onAddNote(){
