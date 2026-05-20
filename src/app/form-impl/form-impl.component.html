@@ -1,0 +1,75 @@
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <div style="margin-top: 5px;">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" />
+        {{userForm.get('name')?.value}}
+        @if(userForm.controls['name'].touched && 
+        userForm.get('name')?.dirty && 
+        userForm.controls['name']?.invalid){
+            <p>error</p>
+        }
+
+    </div>
+
+
+    <div style="margin-top: 5px;">
+        <label for="age">Age</label>
+        <input type="number" formControlName="age" />
+
+        @if(userForm.controls['age'].touched && 
+        userForm.get('age')?.dirty && 
+        userForm.controls['age'].invalid){
+            <p>error</p>
+        }
+    </div>
+
+
+    <div style="margin-top: 5px;">
+        <label for="profession">Profession</label>
+        <select formControlName="profession">
+            <option value="engineer">Engineer</option>
+            <option value="doctor">Doctor</option>
+            <option value="actor">Actor</option>
+        </select>
+    </div>
+
+
+
+    <div style="margin-top: 5px;">
+        <label for="mail">Mail id</label>
+        <input type="email" formControlName="mail" />
+
+        
+
+        @if(userForm.controls['mail'].touched && 
+        userForm.get('mail')?.dirty && 
+        userForm.controls['mail'].errors?.['required']){
+            <p>email is required</p>
+        }
+
+        @if(userForm.controls['mail'].touched && 
+        userForm.get('mail')?.dirty && 
+        userForm.controls['mail'].errors?.['email']){
+            <p>enter correct email</p>
+        }
+
+
+        @if(userForm.controls['mail']?.errors?.['custError']){
+            <p>custom error</p>
+        }
+
+
+    </div>
+
+    
+
+    <div style="margin-top: 5px;" >
+        <label for="phone">Phone</label>
+        <input type="text" formControlName="phone" />
+    </div>
+
+    <button type="submit">Submit</button>
+
+</form>

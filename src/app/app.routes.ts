@@ -19,5 +19,9 @@ export const routes: Routes = [
     {
         path: 'search',
         loadComponent : () => import('./search-impl/search-impl.component').then(m=>m.SearchImplComponent)
+    },
+    {
+        path:'userForm',
+        loadComponent : () => import('./form-impl/form-impl.component').then(m=>m.FormImplComponent)
     }
 ];
