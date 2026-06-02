@@ -1,10 +1,11 @@
-import { Component, EventEmitter, input, model, OnChanges, OnInit, output, Output, SimpleChanges } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, input, model, OnChanges, OnInit, output, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-form-child',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './form-child.component.html',
-  styleUrl: './form-child.component.css'
+  styleUrl: './form-child.component.css',
 })
 export class FormChildComponent implements OnInit, OnChanges{
 
@@ -24,6 +25,7 @@ export class FormChildComponent implements OnInit, OnChanges{
 
   fromMail = model();
 
+  currDate = new Date();
 
 
   ngOnInit(){

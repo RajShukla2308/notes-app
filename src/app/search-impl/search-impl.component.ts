@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, computed, DestroyRef, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from './search.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -31,11 +31,31 @@ export class SearchImplComponent implements OnInit{
 
   @ViewChild('inputToFocus') inputToFocus!: ElementRef;
 
+
+  totalSecs = signal(300);
+  remMins = computed(()=> Math.floor(this.totalSecs() / 60))
+  remSecs = computed(()=> this.totalSecs() % 60)
+
   ngOnInit(){
     this.searchService.getMovies().pipe(takeUntilDestroyed(this.destroyRef$)).subscribe(movies=>{
       this.allMovies = [...movies];
       this.moviesData.set(movies)
     })
+
+    setInterval(()=>{
+      this.totalSecs.update(val=> val - 1);
+    },1000)
+
+
+
+    // impemented counter with closures.
+    let toIncreaseCount = this.increaseCount();
+    // toIncreaseCount.increment(); //1
+    // toIncreaseCount.increment(); // 2
+    // toIncreaseCount.increment();  // 3
+    // toIncreaseCount.increment(); // 4 
+    // toIncreaseCount.decrement(); // 3
+    // toIncreaseCount.increment();
   }
 
   searchMovies(){
@@ -53,6 +73,20 @@ export class SearchImplComponent implements OnInit{
 
   focusInput(){
     this.inputToFocus.nativeElement.focus();
+  }
+
+
+  increaseCount(){
+    let count = 0;
+
+    return {
+      increment: function(){
+        return count +=1;
+      },
+      decrement: function(){
+        return count -= 1 
+      }
+    }
   }
 
 }
