@@ -73,3 +73,11 @@
     <button type="submit">Submit</button>
 
 </form>
+{{modelMail}}
+
+
+<app-form-child [fromParent]="toChild" [formName]="userForm.controls['name'].value"
+[formAge]="userForm.controls['age'].value" [(fromMail)] = "modelMail"
+(fromChild)="parentFunction($event)" >
+
+</app-form-child>
