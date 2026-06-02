@@ -33,13 +33,7 @@ export class FormChildComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges){
-     const {
-    formName: {
-      previousValue,
-      currentValue,
-      firstChange
-    }
-  } = changes;
+    // console.log(changes?.['formName']?.currentValue,changes['formName'].previousValue );
   }
 
   callChildFunction(){

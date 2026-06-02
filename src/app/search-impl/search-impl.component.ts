@@ -1,9 +1,11 @@
-import { Component, computed, DestroyRef, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, computed, DestroyRef, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from './search.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, debounceTime, distinctUntilChanged } from 'rxjs';
 import { CustomDirective } from '../custom.directive';
+import { ColorChangeDirective } from '../color-change.directive';
+import { CommonModule } from '@angular/common';
 
 export interface Movie{
   id: number;
@@ -13,12 +15,12 @@ export interface Movie{
 
 @Component({
   selector: 'app-search-impl',
-  imports: [ReactiveFormsModule,CustomDirective],
+  imports: [ReactiveFormsModule,CustomDirective, ColorChangeDirective, CommonModule],
   templateUrl: './search-impl.component.html',
   styleUrl: './search-impl.component.css'
 })
 
-export class SearchImplComponent implements OnInit{
+export class SearchImplComponent implements OnInit, OnDestroy{
 
   searchText = new FormControl('');
 
@@ -29,7 +31,12 @@ export class SearchImplComponent implements OnInit{
   destroyRef$ = inject(DestroyRef)
 
 
+  clockInterval: any;
+
+
   @ViewChild('inputToFocus') inputToFocus!: ElementRef;
+
+  color= 'red';
 
 
   totalSecs = signal(300);
@@ -42,7 +49,7 @@ export class SearchImplComponent implements OnInit{
       this.moviesData.set(movies)
     })
 
-    setInterval(()=>{
+    this.clockInterval = setInterval(()=>{
       this.totalSecs.update(val=> val - 1);
     },1000)
 
@@ -87,6 +94,11 @@ export class SearchImplComponent implements OnInit{
         return count -= 1 
       }
     }
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.clockInterval);
+
   }
 
 }

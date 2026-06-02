@@ -15,7 +15,14 @@ Search Here <input type="text" [formControl]="searchText" (input)="searchMovies(
 
 <input #inputToFocus appCustom type="text" />
 
-<button (click)="focusInput()" >Focus</button>
+<button appColorChange  (click)="focusInput()" >Focus</button>
 
 <!-- implemented timer -->
 {{remMins()}} : {{remSecs()}}
+
+
+
+<div [ngSwitch]="color">
+    <p *ngSwitchCase="'blue'">BLUE COLOR</p>
+    <p *ngSwitchCase="'red'">RED COLOR</p>
+</div>
