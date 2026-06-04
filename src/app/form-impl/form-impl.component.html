@@ -3,7 +3,7 @@
 
     <div style="margin-top: 5px;">
         <label for="name">Name</label>
-        <input type="text" formControlName="name" />
+        <input #nameInput type="text" formControlName="name" />
         {{userForm.get('name')?.value}}
 
         @if(userForm.controls['name'].touched && 
@@ -77,8 +77,37 @@
 {{modelMail}}
 
 
-<app-form-child [fromParent]="toChild" [formName]="userForm.controls['name'].value"
+<app-form-child #formChild [fromParent]="toChild" [formName]="userForm.controls['name'].value"
 [formAge]="userForm.controls['age'].value" [(fromMail)] = "modelMail"
 (fromChild)="parentFunction($event)" >
 
 </app-form-child>
+
+
+<ng-template #templateIP>
+
+    <div class="template">
+        <p>This is inside template</p>
+    </div>
+
+</ng-template>
+
+
+
+
+<!-- <form #signupForm="ngForm" (ngSubmit)="onSignup()">
+
+    <div>
+        <label for="userName">Enter Username</label>
+        <input type="text" name="userName" [(ngModel)]="user.userName" />
+    </div>
+
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="user.password" />
+    </div>
+
+    <button type="submit">Signup</button>
+
+</form> -->

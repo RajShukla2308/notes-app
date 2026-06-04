@@ -13,7 +13,7 @@ export const routes: Routes = [
         //canActivate: authGuard
     },
     {
-        path: 'update-note/:id',
+        path: 'update-note/:id', 
         loadComponent : () => import('../app/notes/add-note/add-note.component').then(m=>m.AddNoteComponent)
     },
     {

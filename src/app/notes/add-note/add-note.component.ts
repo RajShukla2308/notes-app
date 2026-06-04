@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Note } from '../../notes.model';
 import { NoteServiceService } from '../../note-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-add-note',
@@ -23,6 +23,8 @@ export class AddNoteComponent implements OnInit{
   showIfDirective = false;
 
   private zone = inject(NgZone);
+
+  
 
 
   // inject the activated route

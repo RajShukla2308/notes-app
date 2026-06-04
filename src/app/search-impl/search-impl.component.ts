@@ -2,7 +2,7 @@ import { Component, computed, DestroyRef, ElementRef, HostListener, inject, OnDe
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from './search.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounce, debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounce, debounceTime, distinctUntilChanged, ReplaySubject } from 'rxjs';
 import { CustomDirective } from '../custom.directive';
 import { ColorChangeDirective } from '../color-change.directive';
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,9 @@ export class SearchImplComponent implements OnInit, OnDestroy{
   moviesData:any = signal<Movie[]>([]);
   allMovies: Movie[] = [];
 
-  destroyRef$ = inject(DestroyRef)
+  // destroyRef$ = inject(DestroyRef)
+
+  replaySub = new ReplaySubject(2);
 
 
   clockInterval: any;
@@ -37,6 +39,7 @@ export class SearchImplComponent implements OnInit, OnDestroy{
   @ViewChild('inputToFocus') inputToFocus!: ElementRef;
 
   color= 'red';
+  destroyRef$ = inject(DestroyRef)
 
 
   totalSecs = signal(300);
@@ -52,6 +55,11 @@ export class SearchImplComponent implements OnInit, OnDestroy{
     this.clockInterval = setInterval(()=>{
       this.totalSecs.update(val=> val - 1);
     },1000)
+
+    this.replaySub.subscribe(val=>console.log('A',val))
+    this.replaySub.next(1);
+    this.replaySub.next(2);this.replaySub.next(3);
+    this.replaySub.subscribe(val=>console.log('B',val))
 
 
 

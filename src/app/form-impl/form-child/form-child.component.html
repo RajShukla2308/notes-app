@@ -8,3 +8,65 @@
 <!-- <p> {{currDate | date: 'dd/MM/yyyy' }} </p>
 <p> {{'hello world' | uppercase }}</p> -->
 
+<h2>FORM CHILD</h2>
+
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" formControlName="name" /> 
+
+        @if(bookingForm.controls.name.touched && bookingForm.controls.name.dirty
+         && bookingForm.controls.name.errors){
+            <p style="background-color:'red'">This field is required</p>
+        }
+    </div>
+
+    <div>
+        <label for="profession">Profession</label>
+        <select name="profession" formControlName="profession">
+            <option value="engineer">Engineer</option>
+            <option value="doctor">Doctor</option>
+            <option value="lawyer">Lawyer</option>
+        </select>
+    </div>
+
+
+    <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" formControlName="email" />
+
+
+        @if(bookingForm.controls.email.errors?.['email']){
+            <p>Enter a valid mail id</p>
+        }
+        @if(bookingForm.controls.email.errors?.['required']){
+            <p>This field is required</p>
+
+        }
+    </div>
+
+
+
+    <div>
+        <label for="gender">Gender</label>
+        
+        <label>
+            <input type="radio" formControlName="gender" value="male" />
+            Male 
+        </label>
+
+        <label>
+            <input type="radio" formControlName="gender" value="female" />
+            Female
+        </label>
+    </div>
+
+
+
+    <button type="submit">Submit</button>
+
+
+
+</form>
+
