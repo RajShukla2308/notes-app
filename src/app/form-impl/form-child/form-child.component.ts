@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input, model, OnChanges, OnInit, output, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, input, model, OnChanges, OnInit, output, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-child',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './form-child.component.html',
   styleUrl: './form-child.component.css',
 })
@@ -16,6 +16,14 @@ export class FormChildComponent implements OnInit, OnChanges{
   // @Input() fromParent!: string;
 
   // @Output() fromChild = new EventEmitter<string>();
+
+
+  userName = '';
+  password = '';
+  userForVerification = {
+    username : 'rajshukla@gmail.com',
+    password: '1234'
+  }
 
 
   fromParent = input();
@@ -41,7 +49,7 @@ export class FormChildComponent implements OnInit, OnChanges{
 
 
   ngOnInit(){
-    console.log("logging into child",this.formName())
+    console.log("logging into child",this.bookingForm)
   }
 
   ngOnChanges(changes: SimpleChanges){
@@ -56,6 +64,17 @@ export class FormChildComponent implements OnInit, OnChanges{
 
   onSubmit(){
     console.log(this.bookingForm);
-    
   }
+
+  onSubmitTempForm(signinForm: NgForm){
+    // console.log(signinForm.form.controls['userName'])
+    if(this.userName === this.userForVerification.username
+       && this.password === this.userForVerification.password){
+        console.log('success')
+       }
+    else{
+      console.log('fail')
+    }
+  }
+
 }

@@ -7,9 +7,12 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 
 export class SearchPipe implements PipeTransform{
-    transform(value: string) {
+    transform(items:any[], value: string) {
+        if(!value) return items;
 
-    return value.charAt(0).toUpperCase() + value.slice(1);
+        return items.filter(item=> item.title.toLowerCase().includes(value));
+
+    // return value.charAt(0).toUpperCase() + value.slice(1);
     }
 }
 

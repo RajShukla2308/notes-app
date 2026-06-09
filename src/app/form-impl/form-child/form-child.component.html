@@ -40,7 +40,9 @@
         @if(bookingForm.controls.email.errors?.['email']){
             <p>Enter a valid mail id</p>
         }
-        @if(bookingForm.controls.email.errors?.['required']){
+        @if(bookingForm.controls.email.touched && 
+        bookingForm.controls.email.dirty && 
+        bookingForm.controls.email.errors?.['required']){
             <p>This field is required</p>
 
         }
@@ -70,3 +72,17 @@
 
 </form>
 
+
+
+<h3>Template driven form</h3>
+<form #signinForm="ngForm" (ngSubmit)="onSubmitTempForm(signinForm)">
+
+    <label for="userName">Enter username</label>
+    <input type="email" [(ngModel)]="userName" name="userName"/>
+
+    <label for="password">Enter Password</label>
+    <input type="password" [(ngModel)]="password" name="password" />
+
+    <button type="submit">Submit</button>
+
+</form>
