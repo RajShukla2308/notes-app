@@ -1,0 +1,22 @@
+
+
+<h3>Child component starts</h3>
+<app-child [user]="user" [inputVal]="inputVal">
+  <p #projectedContent>
+    Current Role: {{ user.role }}
+  </p>
+</app-child>
+<h3>Child Component ends</h3>
+
+
+
+
+<button (click)="changeName()">
+  Change Name
+</button>
+
+<button (click)="changeRole()">
+  Change Role
+</button>
+
+<input type="text" [(ngModel)]="inputVal" />

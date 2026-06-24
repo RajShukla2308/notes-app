@@ -23,5 +23,9 @@ export const routes: Routes = [
     {
         path:'userForm',
         loadComponent : () => import('./form-impl/form-impl.component').then(m=>m.FormImplComponent)
+    },
+    {
+        path: 'hooks',
+        loadComponent : () => import('./hooks/parent/parent.component').then(m=>m.ParentComponent)
     }
 ];
