@@ -12,7 +12,12 @@ Filter by
 <select [formControl]="selectedFilter" (change)="handleFilter()">
     <option value="priceAsc">Price(Low to high)</option>
     <option value="priceDsc">Price(High to Low)</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Music">Music</option>
+    <option value="Steel">Steel</option>
 </select>
+
+ <button (click)="addProduct()">Add Product</button>
 
 @for(product of productData(); track product.id){
     <div style="border: 1px solid black;padding: 5px; margin-bottom: 10px;">

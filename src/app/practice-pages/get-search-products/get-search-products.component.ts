@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, signal, inject, DestroyRef, HostListener } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, OnInit, signal, inject, DestroyRef, HostListener, computed } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { tap, finalize, debounceTime, catchError , of} from 'rxjs';
+import { tap, finalize, debounceTime, catchError , of, filter} from 'rxjs';
 import { ScrollDirective } from "./scroll-directive";
 
 
@@ -36,9 +36,22 @@ export class GetSearchProductsComponent implements OnInit{
   searchTerm = new FormControl('');
   selectedFilter = new FormControl('');
 
+  // SEARCH AND FILTER USING SIGNALS ONLY
+  // search = toSignal(this.searchTerm.valueChanges, {initialValue: ''})
+  // filterVal =  toSignal(this.selectedFilter.valueChanges, {initialValue: 'all'});
+  // filteredProducts = computed(()=>{
+  //    return this.productData().filter((item:any)=>{
+  //       let matchSearch = !this.search() || item.name.toLowerCase().includes(this.search()?.toLowerCase());
+  //       let matchFilter = this.filterVal() == 'all' || item.category === this.filterVal();
+
+  //       return matchSearch && matchFilter;
+  //    })
+  // }
+  // )
+
   ngOnInit(){
     this.isLoading = true;
-    this.http.get(this.url).pipe(
+    this.http.get<Product[]>(this.url).pipe(
       takeUntilDestroyed(this.destroyRef$),
       finalize(()=>{
         this.isLoading = false
@@ -70,18 +83,22 @@ export class GetSearchProductsComponent implements OnInit{
      if(this.selectedFilter.value == 'priceAsc') return  a.price - b.price;
      else return b.price - a.price;
     }));
-
   }
 
 
-  // @HostListener('scroll',['$event'])
-  // onScroll(event: Event){
 
-  //   const atBottom = event?.scrollTop + event.clientHeight >= event.scrollHeight - 20;
-  //   if(atBottom){
-  //     this.loadMore.emit();
-  //   }
+  addProduct(){
+    const product = 
+      {
+      id: crypto.randomUUID(), 
+      name: "Mechanical Keyboard2",
+      description: "RGB2 backlit2 mechanical keyboard with blue switches.",
+      price: 3499,
+      category:"Electronics"
+    }
+
+    this.productData.update(prevProds=> [...prevProds, product]);
     
-  // }
+  }
 
 }
