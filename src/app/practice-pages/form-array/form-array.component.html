@@ -1,0 +1,27 @@
+
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    Name : <input type="text" formControlName="name" />
+
+
+    Skills: <div formArrayName="skills">
+
+        @for(skill of skills.controls;track $index){
+            <div>
+
+                <input  [formControlName]="$index" />
+                <button  type="button" (click)="removeSkill($index)">Remove</button>
+            </div>
+        }
+
+        <button type="button" (click)="addSkill()">Add Skill</button>
+
+
+    </div>
+
+
+    <button [disabled]="!userForm.valid" type="submit">Submit</button>
+
+
+</form>

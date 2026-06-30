@@ -31,5 +31,9 @@ export const routes: Routes = [
     {
         path:'product-operations',
         loadComponent : () => import('./practice-pages/get-search-products/get-search-products.component').then(m=>m.GetSearchProductsComponent)
+    },
+    {
+        path: 'form-array',
+        loadComponent : () => import('./practice-pages/form-array/form-array.component').then(m=>m.FormArrayComponent)
     }
 ];
