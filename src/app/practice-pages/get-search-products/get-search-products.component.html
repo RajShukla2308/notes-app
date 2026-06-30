@@ -1,0 +1,24 @@
+<p>get-search-products works!</p>
+
+
+@if(isLoading){
+    <div>Loading data...</div>
+}
+
+
+Searh Products <input  type="text" [formControl]="searchTerm" />
+
+Filter by 
+<select [formControl]="selectedFilter" (change)="handleFilter()">
+    <option value="priceAsc">Price(Low to high)</option>
+    <option value="priceDsc">Price(High to Low)</option>
+</select>
+
+@for(product of productData(); track product.id){
+    <div style="border: 1px solid black;padding: 5px; margin-bottom: 10px;">
+       <b>Name: </b> <p>{{product.name}}</p>
+        <b>Price :</b> <p>{{product.price}}</p>
+        <b>Description: </b> <p>{{product.description}}</p>
+    </div>
+
+}

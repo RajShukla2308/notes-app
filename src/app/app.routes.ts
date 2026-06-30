@@ -27,5 +27,9 @@ export const routes: Routes = [
     {
         path: 'hooks',
         loadComponent : () => import('./hooks/parent/parent.component').then(m=>m.ParentComponent)
+    },
+    {
+        path:'product-operations',
+        loadComponent : () => import('./practice-pages/get-search-products/get-search-products.component').then(m=>m.GetSearchProductsComponent)
     }
 ];

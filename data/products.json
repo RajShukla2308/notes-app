@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse with adjustable DPI and silent clicks.",
+      "price": 799
+    },
+    {
+      "id": 2,
+      "name": "Mechanical Keyboard",
+      "description": "RGB backlit mechanical keyboard with blue switches.",
+      "price": 3499
+    },
+    {
+      "id": 3,
+      "name": "USB-C Hub",
+      "description": "7-in-1 USB-C hub with HDMI, USB 3.0, and SD card reader.",
+      "price": 1999
+    },
+    {
+      "id": 4,
+      "name": "Noise Cancelling Headphones",
+      "description": "Over-ear wireless headphones with active noise cancellation.",
+      "price": 6999
+    },
+    {
+      "id": 5,
+      "name": "Portable SSD",
+      "description": "1TB high-speed portable SSD with USB 3.2 support.",
+      "price": 8499
+    },
+    {
+      "id": 6,
+      "name": "Smart Watch",
+      "description": "Fitness smartwatch with heart rate and sleep tracking.",
+      "price": 4999
+    },
+    {
+      "id": 7,
+      "name": "Bluetooth Speaker",
+      "description": "Portable waterproof Bluetooth speaker with 12-hour battery life.",
+      "price": 2499
+    },
+    {
+      "id": 8,
+      "name": "Webcam",
+      "description": "1080p Full HD webcam with built-in microphone.",
+      "price": 1799
+    },
+    {
+      "id": 9,
+      "name": "Laptop Stand",
+      "description": "Adjustable aluminum laptop stand for improved ergonomics.",
+      "price": 1299
+    },
+    {
+      "id": 10,
+      "name": "Wireless Charger",
+      "description": "15W fast wireless charging pad compatible with Qi-enabled devices.",
+      "price": 999
+    }
+  ]
+}
