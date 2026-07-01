@@ -25,3 +25,9 @@
 
 
 </form>
+
+
+@for(prod of prods | sort: 'desc'; track prod.id){
+    <p>{{prod.name}}</p>
+    <p>{{prod.price}}</p>
+}

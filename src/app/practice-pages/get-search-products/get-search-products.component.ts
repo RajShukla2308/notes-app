@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, signal, inject, DestroyRef, HostListener, computed } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { tap, finalize, debounceTime, catchError , of, filter} from 'rxjs';
+import { tap, finalize, debounceTime, catchError , of, filter, retry} from 'rxjs';
 import { ScrollDirective } from "./scroll-directive";
 
 
@@ -52,13 +52,14 @@ export class GetSearchProductsComponent implements OnInit{
   ngOnInit(){
     this.isLoading = true;
     this.http.get<Product[]>(this.url).pipe(
+      retry(2),
       takeUntilDestroyed(this.destroyRef$),
       finalize(()=>{
         this.isLoading = false
       }),
       // handle error
       catchError((error)=>{
-        console.log(error)
+        console.log(error, 'something went wrong')
         return of([])
       })
     ).subscribe((data:any)=>{
